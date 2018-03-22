@@ -54,6 +54,6 @@ public class CustomerController {
 	@DeleteMapping(value="/customer/{id}")
 	public void deleteCustomer(@PathVariable long id){
 		
-		repository.delete(id);
+		repository.deleteById(id);
 	}
 }
