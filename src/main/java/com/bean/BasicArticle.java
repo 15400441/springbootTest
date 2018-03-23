@@ -3,8 +3,8 @@ package com.bean;
 public class BasicArticle implements Article {
 
 	private Author author;
-	private String body;
-	private String title;
+	private String body="";
+	private String title="";
 	
 	public BasicArticle(){
 		this.author=new Author();
