@@ -17,8 +17,8 @@ public class BasicExtractor implements Extractor{
 	private List<Article> list=new LinkedList<>();
 	
 	private static String nextArticleRegex="^[0-9].*"; 
-	private static String titleRegex="^[0-9].*\\:.*\n";
-	private static String authorRegex="^[0-9].*\\:.*";
+	private static String titleRegex="^[0-9].*\\：.*";
+	private static String authorRegex="^[0-9].*\\：.*";
 	private static String bodyRegex="[^0-9].*";
 
 	public static void main(String[] args) {
@@ -29,6 +29,9 @@ public class BasicExtractor implements Extractor{
 		
 		System.out.println("---------------------------");
 		System.out.println(ls);
+		
+		
+		//extractor.basicMatch("001张九龄：感遇四首之一", nextArticleRegex);
 		
 		
 
@@ -61,14 +64,19 @@ public class BasicExtractor implements Extractor{
 		try {
 			List<String> cs=Files.readAllLines(p, StandardCharsets.UTF_8);
 			
+			
 			for(String content:cs){
+				content=content.trim();
+				
 				if(matchNextArticle(content)){
 					list.add(article);
-					
+					/*
 					if(list.size()>3){
 						list.remove(0);
 						return list;
 					}
+					
+					*/
 					
 					article=new BasicArticle();
 				}
@@ -94,7 +102,7 @@ public class BasicExtractor implements Extractor{
 		}
 		if(content==null)
 			return "";
-		return content.substring(content.indexOf(":")+1);
+		return content.substring(content.indexOf("：")+1);
 	}
 	
 	
@@ -104,7 +112,7 @@ public class BasicExtractor implements Extractor{
 		if(content==null)
 			return "";
 		content=content.replaceAll("[0-9]", "");
-		return content.substring(0, content.indexOf(":"));
+		return content.substring(0, content.indexOf("："));
 	}
 	
 	
