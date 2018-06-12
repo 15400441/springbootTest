@@ -2,8 +2,7 @@ package com.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bean.Client;
-import com.repository.ClientRepository;
+
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -20,8 +19,7 @@ public class HelloController {
 	private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
     
-    @Autowired
-    private ClientRepository clientRepository;
+    
 
     @RequestMapping("/")
     public String index() {
@@ -37,11 +35,7 @@ public class HelloController {
     }
     
     
-    @RequestMapping("/allClients")
-    public Iterable<Client> allClients() {
-    	Iterable<Client> clients= clientRepository.findAll();
-        return clients;
-    }
+   
     
 
 }
