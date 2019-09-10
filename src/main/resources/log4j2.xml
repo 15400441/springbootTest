@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" strict="true" monitorInterval="30">
+
+  <Properties>
+    <Property name="logfileRoot">/data/webapps/anx-auth-service/logs/anx-auth-root.log</Property>
+    <Property name="logfileGeneral">/data/webapps/anx-auth-service/logs/anx-auth-general.log</Property>
+    <Property name="logfileSql">/data/webapps/anx-auth-service/logs/anx-auth-sql.log</Property>
+  </Properties>
+
+  <Appenders>
+
+    <Appender type="Console" name="stdout">
+      <Layout type="PatternLayout" pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%-5p](%-10.10t)[%c]: - %m%n"/>
+    </Appender>
+
+    <Appender type="File" name="r" fileName="${logfileRoot}">
+      <Layout type="PatternLayout" pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%-5p](%-10.10t)[%c]: - %m%n"/>
+    </Appender>
+
+    <Appender type="File" name="general" fileName="${logfileGeneral}">
+      <Layout type="PatternLayout" pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%-5p](%-10.10t)[%c]: - %m%n"/>
+    </Appender>
+
+    <Appender type="File" name="sql" fileName="${logfileSql}">
+      <Layout type="PatternLayout" pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%-5p](%-10.10t)[%c]: - %m%n"/>
+    </Appender>
+
+  </Appenders>
+
+  <Loggers>
+
+    <Logger name="com.anxgroup" level="info" additivity="true">
+      <AppenderRef ref="general"/>
+    </Logger>
+
+    <!-- to disable HHH000456 warning caused by MySQL connector -->
+    <Logger name="org.hibernate.procedure.internal.ProcedureCallImpl" level="error" additivity="false">
+      <AppenderRef ref="general"/>
+      <AppenderRef ref="r"/>
+    </Logger>
+
+    <!-- un-comment this to print all sql to log -->
+    <!--<Logger name="org.hibernate.SQL" level="debug" additivity="true">-->
+    <!--<AppenderRef ref="sql"/>-->
+    <!--</Logger>-->
+
+    <Root level="info">
+      <AppenderRef ref="stdout"/>
+      <AppenderRef ref="r"/>
+    </Root>
+
+  </Loggers>
+
+</Configuration>
